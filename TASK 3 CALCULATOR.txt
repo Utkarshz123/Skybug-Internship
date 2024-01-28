@@ -1,0 +1,106 @@
+HTML CODE:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+CSS CODE:
+
+.calculator {
+    width: 300px;
+    margin: 50px auto;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.display {
+    width: 100%;
+    height: 60px;
+    background-color: #f2f2f2;
+    text-align: right;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.buttons button {
+    width: 100%;
+    height: 60px;
+    border: none;
+    background-color: #e0e0e0;
+    font-size: 24px;
+}
+
+.buttons button:hover {
+    background-color: #ccc;
+}
+
+
+JAVA SCRIPT CODE:
+
+let displayValue = '0';
+
+function updateDisplay() {
+    document.getElementById('display').textContent = displayValue;
+}
+
+function appendToDisplay(value) {
+    if (displayValue === '0' && value !== '/' && value !== '*' && value !== '-' && value !== '+') {
+        displayValue = value;
+    } else {
+        displayValue += value;
+    }
+    updateDisplay();
+}
+
+function clearDisplay() {
+    displayValue = '0';
+    updateDisplay();
+}
+
+function calculate() {
+    try {
+        displayValue = eval(displayValue);
+        updateDisplay();
+    } catch (error) {
+        displayValue = 'Error';
+        updateDisplay();
+    }
+}
